@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: ian. 01, 2020 la 09:23 PM
+-- Timp de generare: ian. 01, 2020 la 10:03 PM
 -- Versiune server: 10.4.11-MariaDB
 -- Versiune PHP: 7.4.1
 
@@ -12,8 +12,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE DATABASE `Equipment_Rental_Business`;
-USE `Equipment_Rental_Business`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -62,6 +60,17 @@ CREATE TABLE `categories` (
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Eliminarea datelor din tabel `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `description`) VALUES
+(1, 'TV SETS', NULL),
+(2, 'AUDIO', NULL),
+(3, 'FURNITURE', NULL),
+(4, 'LIGHTS', NULL),
+(5, 'VR SETS', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +85,15 @@ CREATE TABLE `clients` (
   `country_code` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`, `email`, `phone`, `country_code`, `created_at`) VALUES
+(1, 'Valentin Cerneanu', 'valentincerneanu@gmail.com', '0730', 1, '2020-01-01 20:50:08'),
+(2, 'Alexandru Mihai Manolescu', 'alexmanolescu@gmail.com', '0730', 1, '2020-01-01 20:50:08'),
+(3, 'Vasile Vioara', 'VasileVioara@yahoo.de', '4903', 2, '2020-01-01 20:51:22');
 
 -- --------------------------------------------------------
 
@@ -96,7 +114,9 @@ CREATE TABLE `countries` (
 INSERT INTO `countries` (`code`, `name`, `continent_name`) VALUES
 (1, 'ROMANIA', 'EUROPE'),
 (2, 'GERMANY', 'EUROPE'),
-(3, 'UNITED STATES OF AMERICA', 'NORTH AMERICA');
+(3, 'UNITED STATES OF AMERICA', 'NORTH AMERICA'),
+(4, 'FRANCE', 'EUROPE'),
+(5, 'LITHUANIA', 'EUROPA');
 
 -- --------------------------------------------------------
 
@@ -111,6 +131,15 @@ CREATE TABLE `delivery_types` (
   `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Eliminarea datelor din tabel `delivery_types`
+--
+
+INSERT INTO `delivery_types` (`id`, `name`, `description`, `price`) VALUES
+(1, 'Pick up from warehouse', NULL, 0),
+(2, 'Pick up from sale office', NULL, 0),
+(3, 'Delivery at address', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +150,17 @@ CREATE TABLE `departments` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `departments`
+--
+
+INSERT INTO `departments` (`id`, `name`) VALUES
+(1, 'Sales'),
+(2, 'Logistics'),
+(3, 'Technicians'),
+(4, 'Human Resources'),
+(5, 'Accountancy');
 
 -- --------------------------------------------------------
 
@@ -134,6 +174,18 @@ CREATE TABLE `devices` (
   `description` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `devices`
+--
+
+INSERT INTO `devices` (`id`, `name`, `description`, `created_at`) VALUES
+(1, 'Samsung_G4', NULL, '2020-01-01 20:57:19'),
+(2, 'Samsung_G4', NULL, '2020-01-01 20:57:19'),
+(3, 'Samsung_A10', NULL, '2020-01-01 20:57:19'),
+(4, 'Laptop_i5', NULL, '2020-01-01 20:57:19'),
+(5, 'Laptop_i3', NULL, '2020-01-01 20:57:19'),
+(6, 'Laptop_i7', NULL, '2020-01-01 20:57:19');
 
 -- --------------------------------------------------------
 
@@ -164,6 +216,13 @@ CREATE TABLE `employees` (
   `phone` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Eliminarea datelor din tabel `employees`
+--
+
+INSERT INTO `employees` (`id`, `full_name`, `created_at`, `office_id`, `department_id`, `position_id`, `email`, `phone`) VALUES
+(1, 'Ion Berindei', '2020-01-01 21:00:21', 0, 1, 1, 'IonBerindei@gmail.com', '0700');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +234,14 @@ CREATE TABLE `employeespositions` (
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `employeespositions`
+--
+
+INSERT INTO `employeespositions` (`id`, `name`, `description`) VALUES
+(1, 'inexperienced', NULL),
+(2, 'experienced', NULL);
 
 -- --------------------------------------------------------
 
@@ -490,31 +557,37 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT pentru tabele `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pentru tabele `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pentru tabele `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pentru tabele `delivery_types`
 --
 ALTER TABLE `delivery_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pentru tabele `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pentru tabele `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pentru tabele `devices_to_employees`
@@ -526,13 +599,13 @@ ALTER TABLE `devices_to_employees`
 -- AUTO_INCREMENT pentru tabele `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pentru tabele `employeespositions`
 --
 ALTER TABLE `employeespositions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pentru tabele `items`
