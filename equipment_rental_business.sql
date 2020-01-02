@@ -2,15 +2,18 @@
 -- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Gazdă: 127.0.0.1
--- Timp de generare: ian. 01, 2020 la 10:03 PM
--- Versiune server: 10.4.11-MariaDB
--- Versiune PHP: 7.4.1
+-- Host: localhost
+-- Generation Time: Jan 02, 2020 at 11:38 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+CREATE DATABASE `Equipment_Rental_Business`;
+USE `Equipment_Rental_Business`;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,13 +22,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Bază de date: `equipment_rental_business`
+-- Database: `Equipment_Rental_Business`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `bills`
+-- Table structure for table `bills`
 --
 
 CREATE TABLE `bills` (
@@ -38,7 +41,7 @@ CREATE TABLE `bills` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `bookings`
+-- Table structure for table `bookings`
 --
 
 CREATE TABLE `bookings` (
@@ -51,7 +54,7 @@ CREATE TABLE `bookings` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -60,21 +63,10 @@ CREATE TABLE `categories` (
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `description`) VALUES
-(1, 'TV SETS', NULL),
-(2, 'AUDIO', NULL),
-(3, 'FURNITURE', NULL),
-(4, 'LIGHTS', NULL),
-(5, 'VR SETS', NULL);
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `clients`
+-- Table structure for table `clients`
 --
 
 CREATE TABLE `clients` (
@@ -86,19 +78,10 @@ CREATE TABLE `clients` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `clients`
---
-
-INSERT INTO `clients` (`id`, `name`, `email`, `phone`, `country_code`, `created_at`) VALUES
-(1, 'Valentin Cerneanu', 'valentincerneanu@gmail.com', '0730', 1, '2020-01-01 20:50:08'),
-(2, 'Alexandru Mihai Manolescu', 'alexmanolescu@gmail.com', '0730', 1, '2020-01-01 20:50:08'),
-(3, 'Vasile Vioara', 'VasileVioara@yahoo.de', '4903', 2, '2020-01-01 20:51:22');
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `countries`
+-- Table structure for table `countries`
 --
 
 CREATE TABLE `countries` (
@@ -108,20 +91,18 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `countries`
+-- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`code`, `name`, `continent_name`) VALUES
 (1, 'ROMANIA', 'EUROPE'),
 (2, 'GERMANY', 'EUROPE'),
-(3, 'UNITED STATES OF AMERICA', 'NORTH AMERICA'),
-(4, 'FRANCE', 'EUROPE'),
-(5, 'LITHUANIA', 'EUROPA');
+(3, 'UNITED STATES OF AMERICA', 'NORTH AMERICA');
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `delivery_types`
+-- Table structure for table `delivery_types`
 --
 
 CREATE TABLE `delivery_types` (
@@ -131,19 +112,10 @@ CREATE TABLE `delivery_types` (
   `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `delivery_types`
---
-
-INSERT INTO `delivery_types` (`id`, `name`, `description`, `price`) VALUES
-(1, 'Pick up from warehouse', NULL, 0),
-(2, 'Pick up from sale office', NULL, 0),
-(3, 'Delivery at address', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `departments`
+-- Table structure for table `departments`
 --
 
 CREATE TABLE `departments` (
@@ -151,21 +123,10 @@ CREATE TABLE `departments` (
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `departments`
---
-
-INSERT INTO `departments` (`id`, `name`) VALUES
-(1, 'Sales'),
-(2, 'Logistics'),
-(3, 'Technicians'),
-(4, 'Human Resources'),
-(5, 'Accountancy');
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `devices`
+-- Table structure for table `devices`
 --
 
 CREATE TABLE `devices` (
@@ -175,22 +136,10 @@ CREATE TABLE `devices` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `devices`
---
-
-INSERT INTO `devices` (`id`, `name`, `description`, `created_at`) VALUES
-(1, 'Samsung_G4', NULL, '2020-01-01 20:57:19'),
-(2, 'Samsung_G4', NULL, '2020-01-01 20:57:19'),
-(3, 'Samsung_A10', NULL, '2020-01-01 20:57:19'),
-(4, 'Laptop_i5', NULL, '2020-01-01 20:57:19'),
-(5, 'Laptop_i3', NULL, '2020-01-01 20:57:19'),
-(6, 'Laptop_i7', NULL, '2020-01-01 20:57:19');
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `devices_to_employees`
+-- Table structure for table `devices_to_employees`
 --
 
 CREATE TABLE `devices_to_employees` (
@@ -202,7 +151,7 @@ CREATE TABLE `devices_to_employees` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `employees`
+-- Table structure for table `employees`
 --
 
 CREATE TABLE `employees` (
@@ -216,17 +165,10 @@ CREATE TABLE `employees` (
   `phone` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `employees`
---
-
-INSERT INTO `employees` (`id`, `full_name`, `created_at`, `office_id`, `department_id`, `position_id`, `email`, `phone`) VALUES
-(1, 'Ion Berindei', '2020-01-01 21:00:21', 0, 1, 1, 'IonBerindei@gmail.com', '0700');
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `employeespositions`
+-- Table structure for table `employeespositions`
 --
 
 CREATE TABLE `employeespositions` (
@@ -235,18 +177,10 @@ CREATE TABLE `employeespositions` (
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Eliminarea datelor din tabel `employeespositions`
---
-
-INSERT INTO `employeespositions` (`id`, `name`, `description`) VALUES
-(1, 'inexperienced', NULL),
-(2, 'experienced', NULL);
-
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `items`
+-- Table structure for table `items`
 --
 
 CREATE TABLE `items` (
@@ -262,7 +196,7 @@ CREATE TABLE `items` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `offices`
+-- Table structure for table `offices`
 --
 
 CREATE TABLE `offices` (
@@ -273,7 +207,7 @@ CREATE TABLE `offices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `offices`
+-- Dumping data for table `offices`
 --
 
 INSERT INTO `offices` (`id`, `name`, `country_code`, `address`) VALUES
@@ -283,7 +217,7 @@ INSERT INTO `offices` (`id`, `name`, `country_code`, `address`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -298,7 +232,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `order_items`
+-- Table structure for table `order_items`
 --
 
 CREATE TABLE `order_items` (
@@ -311,7 +245,7 @@ CREATE TABLE `order_items` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `payments`
+-- Table structure for table `payments`
 --
 
 CREATE TABLE `payments` (
@@ -321,10 +255,20 @@ CREATE TABLE `payments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `value`, `payment_type_id`, `created_at`) VALUES
+(1, 120, 1, '2020-01-02 10:35:44'),
+(2, 4, 1, '2020-01-02 10:36:36'),
+(3, 240, 1, '2020-01-02 10:36:36'),
+(4, 1000, 2, '2020-01-02 10:37:20');
+
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `payments_to_bills`
+-- Table structure for table `payments_to_bills`
 --
 
 CREATE TABLE `payments_to_bills` (
@@ -336,7 +280,7 @@ CREATE TABLE `payments_to_bills` (
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `payment_types`
+-- Table structure for table `payment_types`
 --
 
 CREATE TABLE `payment_types` (
@@ -346,7 +290,7 @@ CREATE TABLE `payment_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `payment_types`
+-- Dumping data for table `payment_types`
 --
 
 INSERT INTO `payment_types` (`id`, `name`, `description`) VALUES
@@ -356,7 +300,7 @@ INSERT INTO `payment_types` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `promos`
+-- Table structure for table `promos`
 --
 
 CREATE TABLE `promos` (
@@ -369,7 +313,7 @@ CREATE TABLE `promos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `promos`
+-- Dumping data for table `promos`
 --
 
 INSERT INTO `promos` (`id`, `name`, `description`, `interval_start`, `interval_finish`, `created_at`) VALUES
@@ -378,7 +322,7 @@ INSERT INTO `promos` (`id`, `name`, `description`, `interval_start`, `interval_f
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `warehouses`
+-- Table structure for table `warehouses`
 --
 
 CREATE TABLE `warehouses` (
@@ -389,7 +333,7 @@ CREATE TABLE `warehouses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `warehouses`
+-- Dumping data for table `warehouses`
 --
 
 INSERT INTO `warehouses` (`id`, `name`, `country_code`, `address`) VALUES
@@ -397,60 +341,60 @@ INSERT INTO `warehouses` (`id`, `name`, `country_code`, `address`) VALUES
 (2, 'Berlin', 2, 'Prinzessinnengärten');
 
 --
--- Indexuri pentru tabele eliminate
+-- Indexes for dumped tables
 --
 
 --
--- Indexuri pentru tabele `bills`
+-- Indexes for table `bills`
 --
 ALTER TABLE `bills`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `bookings`
+-- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `clients`
+-- Indexes for table `clients`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
   ADD KEY `country_code` (`country_code`);
 
 --
--- Indexuri pentru tabele `countries`
+-- Indexes for table `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`code`);
 
 --
--- Indexuri pentru tabele `delivery_types`
+-- Indexes for table `delivery_types`
 --
 ALTER TABLE `delivery_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `departments`
+-- Indexes for table `departments`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `devices`
+-- Indexes for table `devices`
 --
 ALTER TABLE `devices`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `devices_to_employees`
+-- Indexes for table `devices_to_employees`
 --
 ALTER TABLE `devices_to_employees`
   ADD PRIMARY KEY (`id`),
@@ -458,7 +402,7 @@ ALTER TABLE `devices_to_employees`
   ADD KEY `device_id` (`device_id`);
 
 --
--- Indexuri pentru tabele `employees`
+-- Indexes for table `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`),
@@ -467,13 +411,13 @@ ALTER TABLE `employees`
   ADD KEY `office_id` (`office_id`);
 
 --
--- Indexuri pentru tabele `employeespositions`
+-- Indexes for table `employeespositions`
 --
 ALTER TABLE `employeespositions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `items`
+-- Indexes for table `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`),
@@ -481,14 +425,14 @@ ALTER TABLE `items`
   ADD KEY `warehouse_id` (`warehouse_id`);
 
 --
--- Indexuri pentru tabele `offices`
+-- Indexes for table `offices`
 --
 ALTER TABLE `offices`
   ADD PRIMARY KEY (`id`),
   ADD KEY `country_code` (`country_code`);
 
 --
--- Indexuri pentru tabele `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
@@ -496,7 +440,7 @@ ALTER TABLE `orders`
   ADD KEY `bill_id` (`bill_id`);
 
 --
--- Indexuri pentru tabele `order_items`
+-- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD KEY `order_id` (`order_id`),
@@ -504,14 +448,14 @@ ALTER TABLE `order_items`
   ADD KEY `booking_id` (`booking_id`);
 
 --
--- Indexuri pentru tabele `payments`
+-- Indexes for table `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `payment_type_id` (`payment_type_id`);
 
 --
--- Indexuri pentru tabele `payments_to_bills`
+-- Indexes for table `payments_to_bills`
 --
 ALTER TABLE `payments_to_bills`
   ADD PRIMARY KEY (`id`),
@@ -519,155 +463,149 @@ ALTER TABLE `payments_to_bills`
   ADD KEY `payment_id` (`payment_id`);
 
 --
--- Indexuri pentru tabele `payment_types`
+-- Indexes for table `payment_types`
 --
 ALTER TABLE `payment_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `promos`
+-- Indexes for table `promos`
 --
 ALTER TABLE `promos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `warehouses`
+-- Indexes for table `warehouses`
 --
 ALTER TABLE `warehouses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `country_code` (`country_code`);
 
 --
--- AUTO_INCREMENT pentru tabele eliminate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pentru tabele `bills`
+-- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `bookings`
+-- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `clients`
+-- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `countries`
---
-ALTER TABLE `countries`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pentru tabele `delivery_types`
+-- AUTO_INCREMENT for table `delivery_types`
 --
 ALTER TABLE `delivery_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `departments`
+-- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `devices`
+-- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `devices_to_employees`
+-- AUTO_INCREMENT for table `devices_to_employees`
 --
 ALTER TABLE `devices_to_employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `employees`
+-- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `employeespositions`
+-- AUTO_INCREMENT for table `employeespositions`
 --
 ALTER TABLE `employeespositions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `items`
+-- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `payments`
+-- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pentru tabele `payments_to_bills`
+-- AUTO_INCREMENT for table `payments_to_bills`
 --
 ALTER TABLE `payments_to_bills`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pentru tabele `payment_types`
+-- AUTO_INCREMENT for table `payment_types`
 --
 ALTER TABLE `payment_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pentru tabele `promos`
+-- AUTO_INCREMENT for table `promos`
 --
 ALTER TABLE `promos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pentru tabele `warehouses`
+-- AUTO_INCREMENT for table `warehouses`
 --
 ALTER TABLE `warehouses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constrângeri pentru tabele eliminate
+-- Constraints for dumped tables
 --
 
 --
--- Constrângeri pentru tabele `clients`
+-- Constraints for table `clients`
 --
 ALTER TABLE `clients`
   ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`code`);
 
 --
--- Constrângeri pentru tabele `devices_to_employees`
+-- Constraints for table `devices_to_employees`
 --
 ALTER TABLE `devices_to_employees`
   ADD CONSTRAINT `devices_to_employees_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`),
   ADD CONSTRAINT `devices_to_employees_ibfk_2` FOREIGN KEY (`device_id`) REFERENCES `devices` (`id`);
 
 --
--- Constrângeri pentru tabele `employees`
+-- Constraints for table `employees`
 --
 ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`position_id`) REFERENCES `employeespositions` (`id`),
@@ -675,27 +613,27 @@ ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_3` FOREIGN KEY (`office_id`) REFERENCES `offices` (`id`);
 
 --
--- Constrângeri pentru tabele `items`
+-- Constraints for table `items`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `items` (`id`),
   ADD CONSTRAINT `items_ibfk_2` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`);
 
 --
--- Constrângeri pentru tabele `offices`
+-- Constraints for table `offices`
 --
 ALTER TABLE `offices`
   ADD CONSTRAINT `offices_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`code`);
 
 --
--- Constrângeri pentru tabele `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`delivery_type`) REFERENCES `delivery_types` (`id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`);
 
 --
--- Constrângeri pentru tabele `order_items`
+-- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
@@ -703,20 +641,20 @@ ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_3` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`);
 
 --
--- Constrângeri pentru tabele `payments`
+-- Constraints for table `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`payment_type_id`) REFERENCES `payment_types` (`id`);
 
 --
--- Constrângeri pentru tabele `payments_to_bills`
+-- Constraints for table `payments_to_bills`
 --
 ALTER TABLE `payments_to_bills`
   ADD CONSTRAINT `payments_to_bills_ibfk_1` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
   ADD CONSTRAINT `payments_to_bills_ibfk_2` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
 
 --
--- Constrângeri pentru tabele `warehouses`
+-- Constraints for table `warehouses`
 --
 ALTER TABLE `warehouses`
   ADD CONSTRAINT `warehouses_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`code`);
