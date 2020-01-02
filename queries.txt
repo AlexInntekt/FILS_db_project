@@ -1,0 +1,35 @@
+Queries
+1. employees
+
+SELECT e.id AS `ID`, e.full_name AS `Full Name`, e.email AS `Email`, e.phone AS `Phone`, ep.name AS `Position`, d.name AS `Department`, o.name AS `Office`, e.created_at AS `Hire date` FROM `employees` AS e JOIN employeespositions AS ep ON ep.id=e.position_id JOIN departments AS d ON d.id=e.department_id JOIN offices AS o ON o.id=e.office_id
+
+2. items
+
+SELECT i.id AS `ID`, i.name AS `Name`, i.description AS `Description`, c.name AS `Category`, w.name AS `Warehouse`, i.price AS `Price`, i.status AS `Status` FROM `items` AS i JOIN categories AS C ON c.id=i.category_id JOIN warehouses AS w ON w.id=i.warehouse_id
+
+3. Warehouses
+
+SELECT w.id AS `ID`, w.name AS `Name`, w.address AS `Address`, c.name as `Country` FROM `warehouses` AS w JOIN countries AS c ON c.code=w.country_code
+
+4. Departments
+
+SELECT d.id as `ID`, d.name as `Name` FROM `departments` AS d
+
+5. Devices to employees
+
+SELECT de.id AS `ID`, e.full_name AS `Full Name`, d.name AS `Device` FROM devices_to_employees AS de JOIN devices AS d ON d.id=de.device_id JOIN employees AS e ON e.id=de.employee_id ORDER BY de.employee_id
+
+6. Offices
+
+SELECT o.id AS `ID`, o.name AS `Name`, o.address AS `Address`, c.name AS `Country` FROM `offices` AS o JOIN countries AS c ON c.code=o.country_code
+
+7. Orders
+
+8. Payments
+
+9. Promos
+
+SELECT p.id AS `ID`, p.name AS `Name`, p.description AS `Description`, p.interval_start AS `Start Date`, p.interval_finish AS `Finish Date` FROM `promos` AS p
+
+10. Bookings
+
