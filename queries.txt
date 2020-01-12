@@ -24,12 +24,18 @@ SELECT de.id AS `ID`, e.full_name AS `Full Name`, d.name AS `Device` FROM device
 SELECT o.id AS `ID`, o.name AS `Name`, o.address AS `Address`, c.name AS `Country` FROM `offices` AS o JOIN countries AS c ON c.code=o.country_code
 
 7. Orders
+SELECT o.id AS `ID`, c.name AS `Client Name`, c.email AS `Client Mail`, c.phone AS `Client Phone`, o.created_at AS `Date`, dt.name as `Delivery type`, dt.description as `Delivery requirements` FROM `orders` AS o JOIN clients AS c ON o.client_id=c.id JOIN delivery_types as dt ON o.delivery_type=dt.id
 
 8. Payments
+SELECT p.id AS `ID`, p.created_at AS `Date`, pt.name as `Type`, p.value as `Value` FROM `payments` AS p JOIN payment_types AS pt ON pt.id=p.payment_type_id
 
 9. Promos
 
 SELECT p.id AS `ID`, p.name AS `Name`, p.description AS `Description`, p.interval_start AS `Start Date`, p.interval_finish AS `Finish Date` FROM `promos` AS p
 
-10. Bookings
+10. Payments to bills
+SELECT pb.id AS `ID`, b.value AS `Value of the order`, p.value AS `Value of the payment`, pt.name as `Payment type`, p.created_at as `Date of the payment`, b.created_at AS `Date of the bill` FROM `payments_to_bills` AS pb JOIN bills AS b ON b.id=pb.bill_id JOIN payments AS p on pb.payment_id=p.id JOIN payment_types AS pt ON pt.id=p.payment_type_id
+
+11. Order items
+SELECT oi.order_id AS `Order ID`, i.name AS `Name`, i.description AS `Description`, c.name as `Category`, b.interval_start AS `Start date`, b.interval_finish AS `Finish Date`, oi.quantity as `Quantity`, o.created_at AS `Date`, o.status AS `Status` FROM `order_items` AS oi JOIN bookings AS b ON b.id=oi.booking_id JOIN items AS i ON i.id=oi.item_id JOIN categories AS C ON c.id=i.category_id JOIN orders AS o ON oi.order_id=o.id
 
